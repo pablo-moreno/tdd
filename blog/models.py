@@ -13,3 +13,6 @@ class Article(models.Model):
     last_modification_date = models.DateTimeField(auto_created=True, blank=True)
     status = models.CharField(max_length=3, choices=Statuses.choices, default=Statuses.DRAFT)
     is_private = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-creation_date', )
