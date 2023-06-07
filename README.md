@@ -1,2 +1,1 @@
-# Homie
-
+# Test Driven Development with Django
