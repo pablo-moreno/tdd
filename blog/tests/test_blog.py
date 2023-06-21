@@ -16,8 +16,8 @@ class TestBlogArticles(APITestCase):
             email='pablo@mail.com',
         )
         self.user_2 = User.objects.create(
-            username='jorge',
-            email='jorge@mail.com',
+            username='maria',
+            email='maria@mail.com',
         )
 
     def test_anonymous_cannot_create_article(self):

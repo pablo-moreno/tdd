@@ -1,0 +1,13 @@
+[report]
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise NotImplementedError
+[run]
+omit =
+    # omit anything in a .local directory anywhere
+    */.idea/*
+    */src/*
+    */dist-packages/*

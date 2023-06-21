@@ -5,3 +5,4 @@ router = DefaultRouter()
 router.register('', ArticleViewSet)
 
 urlpatterns = router.urls
+# urlpatterns = []
