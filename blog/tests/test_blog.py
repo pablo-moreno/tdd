@@ -164,3 +164,36 @@ class TestBlogArticles(APITestCase):
         })
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_delete_article(self):
+        self.client.force_login(self.user_1)
+
+        # Creamos un artículo para el usuario 1
+        response = self.client.post('/api/v1/articles/', {
+            'text': 'Hola mundo',
+            'status': 'PUB',
+            'is_private': False,
+        })
+
+        pk = response.data.get('id')
+
+        response = self.client.delete(f'/api/v1/articles/{pk}/')
+        assert response.status_code == status.HTTP_204_NO_CONTENT
+
+    def test_cannot_delete_other_user_article(self):
+        self.client.force_login(self.user_1)
+
+        # Creamos un artículo para el usuario 1
+        response = self.client.post('/api/v1/articles/', {
+            'text': 'Hola mundo',
+            'status': 'PUB',
+            'is_private': False,
+        })
+
+        pk = response.data.get('id')
+
+        # Nos registramos como usuario 2 y tratamos de borrarlo
+        self.client.force_login(self.user_2)
+
+        response = self.client.delete(f'/api/v1/articles/{pk}/')
+        assert response.status_code == status.HTTP_403_FORBIDDEN
